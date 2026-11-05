@@ -5,15 +5,15 @@ Sistema per la gestione di **festival cinematografici**: festival, film, artisti
 
 ## Tecnologie
 - Java 21, Spring Boot 4.0 (Web MVC, Data JPA, Validation, Security), Thymeleaf
-- PostgreSQL, Hibernate
+- PostgreSQL, Hibernateee
 - React + TypeScript (Vite), Axios, React Router
 
 ## Avvio
 1. **Database:** PostgreSQL con un database `siwfestival` (utente `postgres` / password `postgres`).
-   Sul mio PC PostgreSQL è sulla porta **5433**: se il vostro è sulla 5432, cambiare la riga
+   Sul mio PC PostgreSQL è sulla porta **5433**: se il vostro è sulla 5432, cambiate la riga
    `spring.datasource.url` in `src/main/resources/application.properties`.
 2. **Backend:** `./mvnw spring-boot:run` (oppure Run di `FestivalApplication`) → http://localhost:8080
-   Con `ddl-auto=create` le tabelle vengono ricreate a ogni avvio e popolate da `import.sql`.
+   Con `ddl-auto=create` le tabelle vengono ricreate a ogni avvio e riempite da `import.sql`.
 3. **Frontend React:** `cd frontend`, `npm install`, `npm run dev` → http://localhost:5173
    (raggiungibile anche dal link "Programma dei festival (React)" nella home).
 
