@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='Festival')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Dettagli Festival</h1>
+		<div th:if="${festival}">
+			<h2>
+				<span th:text="${festival.name}">Mostra</span>
+				<span th:text="'(' + ${festival.year} + ')'">2026</span>
+			</h2>
+			<div>
+				<strong>Città:</strong>
+				<span th:text="${festival.city}">Venezia</span>
+			</div>
+			<div>
+				<strong>Date:</strong>
+				<span th:text="${festival.startDate} + ' - ' + ${festival.endDate}">2026-08-27 - 2026-09-06</span>
+			</div>
+			<div>
+				<strong>Descrizione:</strong>
+				<span th:text="${festival.description}">descrizione</span>
+			</div>
+			<h3>Film in concorso</h3>
+			<ul class="cards" th:if="${not #lists.isEmpty(movies)}">
+				<li th:each="movie : ${movies}">
+					<a th:href="@{'/movies' + '/' + ${movie.id}}" th:text="${movie.title}">titolo</a>
+					<span th:if="${movie.director}" th:text="' di ' + ${movie.director.name} + ' ' + ${movie.director.surname}">di regista</span>
+				</li>
+			</ul>
+			<span th:if="${#lists.isEmpty(movies)}">Nessun film</span>
+			<h3>Programma delle proiezioni</h3>
+			<ul class="cards" th:if="${not #lists.isEmpty(festival.screenings)}">
+				<li th:each="screening : ${festival.screenings}" th:text="${screening.date} + ' ore ' + ${screening.time} + ' - ' + ${screening.movie.title} + ' - ' + ${screening.room.name} + ' (' + ${screening.status} + ')'">data ora - film - sala (stato)</li>
+			</ul>
+			<span th:if="${#lists.isEmpty(festival.screenings)}">Nessuna proiezione in programma</span>
+			<div>
+				<a th:href="@{'/admin/festivals/' + ${festival.id} + '/screenings/new'}">Programma una proiezione</a>
+			</div>
+		</div>
+		<div th:unless="${festival}">Non esiste</div>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

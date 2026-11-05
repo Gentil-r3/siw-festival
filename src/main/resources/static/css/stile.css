@@ -1,0 +1,97 @@
+/* colore principale come variabile CSS (lez. 09 slide 118) */
+:root {
+    --primary-color: rgb(98, 192, 144);
+}
+
+body {
+    font-family: "Geneva", Arial, sans-serif;
+    color: dimgrey;
+    margin: 0;
+}
+
+main {
+    margin: 1rem 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    color: var(--primary-color);
+}
+
+/* header con flexbox: logo a sinistra, menu a destra (lez. 09 slide 56-74) */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-bottom: 4px solid var(--primary-color);
+    padding: 0.5rem 2rem;
+}
+
+header img {
+    height: 3rem;
+}
+
+header nav a {
+    margin-left: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* etichette della form tutte larghe uguali, così i campi sono allineati (come il css del prof) */
+label {
+    width: 8em;
+    display: inline-block;
+}
+
+/* elenchi a "schede": box model con bordo arrotondato (lez. 09 slide 23-29) */
+ul.cards {
+    list-style: none;
+    padding: 0;
+}
+
+ul.cards li {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.8rem;
+}
+
+form div {
+    margin-bottom: 0.6rem;
+}
+
+.error {
+    color: firebrick;
+}
+
+footer {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background-color: #eeeeee;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+/* smartphone: header in colonna e margini ridotti (lez. 09 slide 132) */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+    }
+
+    header nav a {
+        margin: 0 0.6rem;
+    }
+
+    main {
+        margin: 0.5rem;
+    }
+}

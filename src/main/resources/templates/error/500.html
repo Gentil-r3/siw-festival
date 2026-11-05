@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='500 - Errore interno')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>500</h1>
+		<p th:text="${errorMessage}">Si è verificato un errore interno.</p>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

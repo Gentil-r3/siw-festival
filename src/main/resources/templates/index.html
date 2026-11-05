@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='SiwFestival - Homepage')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Consulta</h1>
+		<ul class="cards">
+			<li><a href="/festivals">Festival</a></li>
+			<li><a href="/movies">Film</a></li>
+			<li><a href="http://localhost:5173/">Programma dei festival (React)</a></li>
+		</ul>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='Inserimento Film')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Aggiungi un film</h1>
+		<form th:action="@{/admin/movies}" method="POST" th:object="${movie}">
+			<div class="error" th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+			<input type="hidden" th:field="*{id}"/>
+			<div>
+				<label>Titolo:</label> <span><input type="text" th:field="*{title}"/></span>
+				<span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+			</div>
+			<div>
+				<label>Anno:</label> <span><input type="text" th:field="*{year}"/></span>
+				<span class="error" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+			</div>
+			<div>
+				<label>Durata (min):</label> <span><input type="text" th:field="*{duration}"/></span>
+				<span class="error" th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></span>
+			</div>
+			<div>
+				<label>Genere:</label> <span><input type="text" th:field="*{genre}"/></span>
+				<span class="error" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></span>
+			</div>
+			<div>
+				<label>Paese:</label> <span><input type="text" th:field="*{productionCountry}"/></span>
+				<span class="error" th:if="${#fields.hasErrors('productionCountry')}" th:errors="*{productionCountry}"></span>
+			</div>
+			<div>
+				<label>Regista:</label>
+				<span>
+					<select th:field="*{director}">
+						<option value="">Seleziona un regista</option>
+						<option th:each="artist : ${artists}" th:value="${artist.id}" th:text="${artist.name} + ' ' + ${artist.surname}"></option>
+					</select>
+				</span>
+				<span class="error" th:if="${#fields.hasErrors('director')}" th:errors="*{director}"></span>
+			</div>
+			<div>
+				<span><button type="submit">Conferma</button></span>
+			</div>
+		</form>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

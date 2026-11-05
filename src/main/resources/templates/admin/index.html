@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='SiwFestival - Amministrazione')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Gestione</h1>
+		<h2>(riservato agli amministratori)</h2>
+		<ul class="cards">
+			<li><a href="/admin/movies/new">Aggiungi un film</a></li>
+			<li><a href="/festivals">Programma una proiezione (scegli il festival)</a></li>
+		</ul>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

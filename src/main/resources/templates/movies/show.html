@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='Film')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Dettagli Film</h1>
+		<div th:if="${movie}">
+			<h2>
+				<span th:text="${movie.title}">Up!</span>
+				<span th:text="'(' + ${movie.year} + ')'">2000</span>
+			</h2>
+			<div>
+				<strong>Durata:</strong>
+				<span th:text="${movie.duration} + ' min'">120 min</span>
+			</div>
+			<div>
+				<strong>Genere:</strong>
+				<span th:text="${movie.genre}">Drammatico</span>
+			</div>
+			<div>
+				<strong>Paese di produzione:</strong>
+				<span th:text="${movie.productionCountry}">Italia</span>
+			</div>
+			<div>
+				<strong>Regista:</strong>
+				<span th:if="${movie.director}" th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Nome regista</span>
+				<span th:unless="${movie.director}">Non specificato</span>
+			</div>
+			<div>
+				<strong>Attori:</strong>
+				<ul th:if="${not #lists.isEmpty(movie.interpretations)}">
+					<li th:each="interpretation : ${movie.interpretations}" th:text="${interpretation.artist.name} + ' ' + ${interpretation.artist.surname} + ' (' + ${interpretation.characterName} + ')'">Nome attore (personaggio)</li>
+				</ul>
+				<span th:if="${#lists.isEmpty(movie.interpretations)}">Nessun attore specificato</span>
+			</div>
+			<div>
+				<a th:href="@{'/admin/movies/' + ${movie.id} + '/edit'}">Modifica</a>
+				<form th:action="@{'/admin/movies/' + ${movie.id} + '/delete'}" method="POST" style="display:inline;">
+					<button type="submit">Cancella</button>
+				</form>
+			</div>
+
+			<h3>Recensioni</h3>
+			<div>
+				<a th:if="${userDetails}" th:href="@{'/user/movies/' + ${movie.id} + '/reviews/new'}">Scrivi una recensione</a>
+				<a th:unless="${userDetails}" href="/login">Accedi per scrivere una recensione</a>
+			</div>
+			<ul class="cards" th:if="${not #lists.isEmpty(movie.reviews)}">
+				<li th:each="review : ${movie.reviews}">
+					<strong th:text="${review.user.name} + ' ' + ${review.user.surname}">Autore</strong>
+					<span th:text="' - voto ' + ${review.rating} + '/5 - ' + ${review.date}">- voto 5/5</span>
+					<p th:text="${review.text}">testo della recensione</p>
+					<!-- solo l'autore vede Modifica e Cancella -->
+					<div th:if="${currentUser != null and review.user.id == currentUser.id}">
+						<a th:href="@{'/user/reviews/' + ${review.id} + '/edit'}">Modifica</a>
+						<form th:action="@{'/user/reviews/' + ${review.id} + '/delete'}" method="POST" style="display:inline;">
+							<button type="submit">Cancella</button>
+						</form>
+					</div>
+				</li>
+			</ul>
+			<span th:if="${#lists.isEmpty(movie.reviews)}">Nessuna recensione</span>
+		</div>
+		<div th:unless="${movie}">Non esiste</div>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

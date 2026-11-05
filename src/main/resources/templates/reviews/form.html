@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='Recensione')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Recensione</h1>
+		<h2 th:text="${movie.title} + ' (' + ${movie.year} + ')'">Film</h2>
+		<form th:action="${review.id == null} ? @{'/user/movies/' + ${movie.id} + '/reviews'} : @{'/user/reviews/' + ${review.id}}"
+			method="POST" th:object="${review}">
+			<div class="error" th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+			<input type="hidden" th:field="*{id}"/>
+			<div>
+				<label>Voto:</label>
+				<span>
+					<select th:field="*{rating}">
+						<option value="">Scegli un voto</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
+				</span>
+				<span class="error" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+			</div>
+			<div>
+				<label>Testo:</label>
+				<span><textarea th:field="*{text}" rows="5" cols="50"></textarea></span>
+				<span class="error" th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
+			</div>
+			<div>
+				<span><button type="submit">Conferma</button></span>
+			</div>
+		</form>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

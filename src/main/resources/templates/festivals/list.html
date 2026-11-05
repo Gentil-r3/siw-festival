@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='Festival')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Festival</h1>
+		<div th:if="${festivals==null || festivals.isEmpty()}">Non ci sono festival nel sistema</div>
+		<ul class="cards">
+			<li th:each="festival : ${festivals}">
+				<a th:href="@{'/festivals' + '/' + ${festival.id}}" th:text="${festival.name} + ' ' + ${festival.year}">nome festival</a>
+				<div th:text="${festival.city} + ', ' + ${festival.startDate} + ' - ' + ${festival.endDate}">città, date</div>
+			</li>
+		</ul>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

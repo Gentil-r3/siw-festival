@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="headerfiles(title)">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="/favicon.ico" />
+	<!-- ?version=2: cambiando il numero il browser riscarica il css invece di usare quello vecchio in cache (lez. 08 slide 23) -->
+	<link rel="stylesheet" href="/css/stile.css?version=2" />
+	<title th:text="${title}">SiwFestival</title>
+</head>
+
+<body>
+	<header th:fragment="intestazione">
+		<a href="/"><img src="/images/logo-siw.png" alt="SiwFestival" /></a>
+		<nav>
+			<a href="/">Home</a>
+			<a href="/festivals">Festival</a>
+			<a href="/movies">Film</a>
+			<a href="/admin/index">Gestione</a>
+			<!-- utente loggato (messo nel modello dal GlobalController): nome + logout -->
+			<span th:if="${userDetails}">
+				<a href="#" th:text="${userDetails.username}">utente</a>
+				<form th:action="@{/logout}" method="POST" style="display:inline;">
+					<button type="submit">Logout</button>
+				</form>
+			</span>
+			<a th:unless="${userDetails}" href="/login">Login</a>
+		</nav>
+	</header>
+
+	<footer th:fragment="footer">
+		SiwFestival - Sistemi Informativi su Web, Roma Tre
+	</footer>
+</body>
+
+</html>

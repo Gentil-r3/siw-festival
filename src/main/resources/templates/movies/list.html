@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='Film')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Film</h1>
+		<div th:if="${movies==null || movies.isEmpty()}">Non ci sono film nel sistema</div> <!-- se la lista è vuota -->
+		<ul class="cards">
+			<li th:each="movie : ${movies}"> <!-- ripete il li una volta per ogni film, come un for-each -->
+				<a th:href="@{'/movies' + '/' + ${movie.id}}" th:text="${movie.title}">titolo</a> <!-- costruisce il link /movies/5 -->
+				<span th:text="'(' + ${movie.year} + ')'">(2000)</span>
+			</li>
+		</ul>
+		<a href="/admin/movies/new">Aggiungi un film</a>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='Programma proiezione')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Programma una proiezione</h1>
+		<h2 th:text="${festival.name} + ' (' + ${festival.startDate} + ' - ' + ${festival.endDate} + ')'">Festival</h2>
+		<form th:action="@{'/admin/festivals/' + ${festival.id} + '/screenings'}" method="POST" th:object="${screening}">
+			<div class="error" th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+			<div>
+				<label>Film:</label>
+				<span>
+					<select th:field="*{movie}">
+						<option value="">Seleziona un film</option>
+						<option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.title} + ' (' + ${movie.duration} + ' min)'"></option>
+					</select>
+				</span>
+			</div>
+			<div>
+				<label>Sala:</label>
+				<span>
+					<select th:field="*{room}">
+						<option value="">Seleziona una sala</option>
+						<option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name} + ' (' + ${room.capacity} + ' posti)'"></option>
+					</select>
+				</span>
+			</div>
+			<div>
+				<label>Data:</label> <span><input type="date" th:field="*{date}"/></span>
+			</div>
+			<div>
+				<label>Ora:</label> <span><input type="time" th:field="*{time}"/></span>
+			</div>
+			<div>
+				<span><button type="submit">Conferma</button></span>
+			</div>
+		</form>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

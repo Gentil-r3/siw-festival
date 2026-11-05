@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/base.html :: headerfiles(title='SiwFestival - Login')}"></head>
+
+<body>
+	<header th:replace="~{fragments/base.html :: intestazione}"></header>
+	<main>
+		<h1>Login</h1>
+		<form th:action="@{/login}" method="POST">
+			<div>
+				<label>Username:</label>
+				<span><input name="username" type="text" required /></span>
+			</div>
+			<div>
+				<label>Password:</label>
+				<span><input name="password" type="password" required /></span>
+			</div>
+			<div class="error" th:if="${param.error != null}">Username o password errati</div>
+			<div>
+				<span><button type="submit">Login</button></span>
+			</div>
+		</form>
+		<div>
+			<a th:href="@{/register}">Non hai un account? Registrati</a>
+		</div>
+	</main>
+	<footer th:replace="~{fragments/base.html :: footer}"></footer>
+</body>
+
+</html>

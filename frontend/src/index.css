@@ -1,0 +1,49 @@
+:root {
+  --primary-color: rgb(98, 192, 144);
+}
+
+body {
+  font-family: "Geneva", Arial, sans-serif;
+  color: dimgrey;
+  margin: 0;
+}
+
+header {
+  border-bottom: 4px solid var(--primary-color);
+  padding: 1rem 2rem;
+  font-weight: bold;
+}
+
+main {
+  margin: 1rem 2rem;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+h1 {
+  color: var(--primary-color);
+}
+
+ul.cards {
+  list-style: none;
+  padding: 0;
+}
+
+ul.cards li {
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+}
+
+li.cancelled {
+  text-decoration: line-through;
+  color: darkgrey;
+}
+
+.error {
+  color: firebrick;
+}
