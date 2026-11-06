@@ -55,6 +55,15 @@ public class MovieService {
             throw new DuplicateMovieException(movie.getTitle(), movie.getYear());
             //LANCIO ECCEZIONE E IL FILM NON VIENE SALVATO 
         }
+        if (movie.getId() != null) {
+            // modifica: la form non invia le collezioni; se restassero null, il save (merge) le svuoterebbe
+            // e orphanRemoval cancellerebbe attori e recensioni. Tengo quelle del film già salvato.
+            Movie existing = findById(movie.getId());
+            movie.setFestivals(existing.getFestivals());
+            movie.setInterpretations(existing.getInterpretations());
+            movie.setScreenings(existing.getScreenings());
+            movie.setReviews(existing.getReviews());
+        }
         return movieRepository.save(movie);
     }
 
