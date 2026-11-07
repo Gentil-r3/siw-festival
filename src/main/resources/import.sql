@@ -37,7 +37,7 @@ insert into screening (id, date, time, status, festival_id, movie_id, room_id) v
 insert into screening (id, date, time, status, festival_id, movie_id, room_id) values(nextval('screening_seq'), '2026-09-05', '21:00', 'CANCELLED', (select id from festival where city = 'Venezia'), (select id from movie where title = 'Inception'), (select id from room where name = 'Sala Grande'));
 insert into screening (id, date, time, status, festival_id, movie_id, room_id) values(nextval('screening_seq'), '2026-10-24', '21:00', 'SCHEDULED', (select id from festival where city = 'Roma'), (select id from movie where title = 'Il padrino'), (select id from room where name = 'Sala Sinopoli'));
 insert into screening (id, date, time, status, festival_id, movie_id, room_id) values(nextval('screening_seq'), '2026-10-25', '18:00', 'SCHEDULED', (select id from festival where city = 'Roma'), (select id from movie where title = 'Il divo'), (select id from room where name = 'Sala Sinopoli'));
-insert into users (id, name, surname, email) values(nextval('users_seq'), 'Andrea', 'Admin', 'andrea.gentile@uniroma3.it');
+insert into users (id, name, surname, email) values(nextval('users_seq'), 'Andrea', 'Admin', 'and.gentile@uniroma3.it');
 insert into users (id, name, surname, email) values(nextval('users_seq'), 'Mario', 'Rossi', 'mario@email.it');
 insert into users (id, name, surname, email) values(nextval('users_seq'), 'Anna', 'Bianchi', 'anna@email.it');
 insert into credentials (id, username, password, role, user_id) values(nextval('credentials_seq'), 'andrea', '$2a$10$Qby.eTpkp.9JQWAiVws9UehZk6sItP7xZVvEue2Navg8kCmyR.h76', 'ADMIN', (select id from users where email = 'and.gentile@uniroma3.it'));
